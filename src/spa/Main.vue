@@ -31,12 +31,17 @@
       <md-layout class="news-container">
         <md-card>
           <md-card-header>
-            <div class="md-title">Calendário de eventos</div>
+            <md-button @click.native="news" v-if="addNewsView"><md-icon>arrow_back</md-icon></md-button>
+            <div  v-if="!addNewsView" class="md-title">Notícias</div>
           </md-card-header>
 
           <md-card-content class="news-card-content">
-            <news-panel></news-panel>
+            <news-panel :add-news-view="addNewsView" @news-added="news()"></news-panel>
           </md-card-content>
+
+          <md-card-actions>
+            <md-button v-if="!addNewsView" @click.native="addNews()" >Adicionar Notícia</md-button>
+          </md-card-actions>
         </md-card>
       </md-layout>
     </md-layout>
@@ -71,7 +76,9 @@
   export default {
     mixins: [RequireSession],
     data() {
-      return {}
+      return {
+        addNewsView: false
+      }
     },
     components: {
       NewsPanel
@@ -99,6 +106,12 @@
       },
       addEvent() {
         this.$router.push({ path: '/main/add-event' })
+      },
+      addNews() {
+        this.addNewsView = true
+      },
+      news() {
+        this.addNewsView = false
       },
       calendar() {
         this.$router.push({ path: '/main/calendar' })
