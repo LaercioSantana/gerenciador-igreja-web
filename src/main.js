@@ -35,6 +35,7 @@ const router = configRouter(VueRouter)
 // console.log('fullcalendar', fullcalendar);
 // import FullCalendar from 'vue-full-calendar'
 // Vue.component('full-calendar', FullCalendar)
+moment.locale('pt-br')
 
 // Sincronização entre rotas e vuex.
 // Garante o estado da store em todas as páginas SPA.

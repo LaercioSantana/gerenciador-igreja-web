@@ -2,6 +2,24 @@
   <div class="calendar">
     <!-- <full-calendar :events="fcEvents" locale="pt" :config="config"></full-calendar> -->
     <div id="full-calendar"></div>
+    <md-dialog md-open-from="#full-calendar" md-close-to="#full-calendar" ref="dialog">
+      <md-dialog-title>{{ evt.title }}</md-dialog-title>
+
+      <md-dialog-content>
+          <span class="md-body-1">{{evt.content}}</span>
+        </br></br>
+          <div class="md-body-1">Tipo: {{evt.type}}</div>
+          <div class="md-body-1">Inicia: {{evt.startTime}}</div>
+          <div class="md-body-1">Termina: {{evt.endTime}}</div>
+          <div class="md-body-1">Responsável: {{evt.reponsible}}</div>
+          <div class="md-body-1">Congregação: {{evt.congregation}}</div>
+          <div class="md-body-1">Endereço: {{evt.address}}</div>
+      </md-dialog-content>
+
+      <md-dialog-actions>
+        <md-button class="md-primary" @click.native="closeDialog('dialog')">Fechar</md-button>
+      </md-dialog-actions>
+    </md-dialog>
   </div>
 </template>
 
@@ -58,7 +76,13 @@
         config: {
           selectable: true,
           editable: true
-        }
+        },
+        prompt: {
+          title: "titulo",
+          ok: "ok",
+          value: ''
+        },
+        evt: {}
       }
     },
     components: {
@@ -69,6 +93,12 @@
       },
     },
     methods: {
+      openDialog(ref) {
+      this.$refs[ref].open();
+      },
+      closeDialog(ref) {
+        this.$refs[ref].close();
+      },
       eventSelected(){
         console.log("eventSelected");
       },
@@ -95,12 +125,12 @@
                 dateEnd: moment(event.data_termino, 'DD-MM-YYYY HH:mm:ss').format("YYYY-MM-DD HH:mm:ss"),
                 reponsible: event.responsavel_pela_organizacao,
                 content: event.resumo,
-                congregation: event.congregacoes,
+                congregation: event.congregacao_relacionada,
                 presents: event.presentes,
                 address: event.endereco
               }
             });
-
+            const self = this;
             $('#full-calendar').fullCalendar({
                header: {
                  left: 'prev,next today',
@@ -112,7 +142,14 @@
                navLinks: true, // can click day/week names to navigate views
                editable: true,
                eventLimit: true, // allow "more" link when too many events
-               events: this.fcEvents
+               events: this.fcEvents,
+               eventClick: function(event){
+                 self.evt = event
+                 event.startTime = moment(event.dateStart, "YYYY-MM-DD HH:mm:ss").calendar()
+                 event.endTime = moment(event.dateEnd, "YYYY-MM-DD HH:mm:ss").calendar()
+                 console.log(event);
+                 self.openDialog('dialog')
+               }
              });
 
 
