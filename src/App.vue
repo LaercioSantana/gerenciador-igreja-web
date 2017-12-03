@@ -18,6 +18,7 @@
 <style>
   @import './assets/css/main.css';
 
+
   .slide-fade-enter-active {
     transition: all .2s ease;
   }

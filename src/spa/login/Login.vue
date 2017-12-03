@@ -19,7 +19,7 @@
           <md-input type="password"
             v-model="password"></md-input>
         </md-input-container>
-        <span class="md-error" v-if="userNotFound">Email ou senha errados.</span>
+        <span class="md-error" v-if="userNotFound">Email ou senha errados</span>
 
       </md-card-content>
 

@@ -61,12 +61,52 @@
    },
  ]
 
+ newsDemo = []
+
  export default{
    name: 'NewsPanel',
    data: function(){
      return {
-       news: newsDemo
+       news: []
      };
    },
+   computed: {
+     token(){
+       return this.$cookie.get('gerenciador_igreja_token')
+     }
+   },
+   mounted(){
+     this.loadNews()
+   },
+   methods: {
+     loadNews(){
+       console.log(window);
+       var payload = {
+           token: this.token,
+       }
+
+       if(window.URL_API == undefined)
+        setTimeout(this.loadNews, 200)
+       else
+         this.$http.post(window.URL_API+"noticias/todas", payload ).then(response => {
+           // get body data
+
+           this.news = response.body.map(function(news){
+             return {
+               title: news.titulo,
+               type: news.tipo,
+               date: news.data,
+               reponsible: news.criador,
+               content: news.conteudo,
+               congregation: news.congregacoes
+             }
+           });
+
+
+         }, response => {
+           console.log(response.body);
+         });
+     }
+   }
  };
  </script>

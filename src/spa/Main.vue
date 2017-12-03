@@ -104,7 +104,9 @@
         console.log('Closed: ' + ref);
       },
       addEventButtonClass(){
-        console.log(this.$router);
+        return {
+          hidden: this.$router.currentRoute.fullPath.indexOf('add-event') > -1
+        }
       },
       exit(){
         this.clearSession();
