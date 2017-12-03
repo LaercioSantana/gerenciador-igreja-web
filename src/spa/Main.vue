@@ -18,6 +18,10 @@
           <md-card-content>
             <router-view></router-view>
           </md-card-content>
+
+          <md-card-actions>
+            <md-button>Adicionar Evento</md-button>
+          </md-card-actions>
         </md-card>
       </md-layout>
       <md-layout class="news-container">

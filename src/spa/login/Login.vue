@@ -23,10 +23,14 @@
       </md-card-content>
 
       <md-card-actions>
-        <md-button>Esqueci minha senha</md-button>
-        <md-button class="md-raised md-primary"
+        <!-- <md-button @click.stop="signup" >Criar conta</md-button> -->
+        <md-button class="md-raised md-default"
           @click.stop="login">
-          Logar
+          Entrar
+        </md-button>
+        <md-button class="md-raised md-primary"
+          @click.stop="signup">
+          Criar Conta
         </md-button>
       </md-card-actions>
     </md-card>
@@ -56,6 +60,9 @@
     methods: {
       login() {
         this.$router.push({ path: '/main' })
+      },
+      signup() {
+        this.$router.push({ path: '/signup' })
       }
     }
   }
@@ -70,7 +77,7 @@
 
   .Login__CardWrappper {
     margin-top: 20vh;
-    min-width: 300px;
+    min-width: 400px;
     width: 22%;
   }
 

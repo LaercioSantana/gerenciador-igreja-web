@@ -1,5 +1,6 @@
 import Home from '../spa/Home'
 import Login from '../spa/login/Login'
+import Signup from '../spa/Signup'
 import NotFound from '../spa/NotFound'
 import Main from '../spa/Main'
 import Calendar from '../spa/Calendar'
@@ -13,6 +14,10 @@ export const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/signup',
+    component: Signup
   },
   {
     path: '/main',

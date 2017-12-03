@@ -6,6 +6,7 @@ import VueRouter from 'vue-router'
 import { Validator } from 'vee-validate'
 import { sync } from 'vuex-router-sync'
 import VuejsCalendar from 'vuejs-calendar'
+import Vuelidate from 'vuelidate'
 
 // Importação de código de configuração/criação criados.
 import plugins from './config/plugins'
@@ -19,6 +20,7 @@ plugins(Vue, Vuex, VueRouter)
 directives(Vue)
 theme(Vue)
 validations(Validator)
+Vue.use(Vuelidate)
 
 const store = new Vuex.Store(vuexStore)
 const router = configRouter(VueRouter)
@@ -40,3 +42,5 @@ new Vue({ // eslint-disable-line no-new
   template: '<App/>',
   components: { App }
 })
+
+window.URL_API = 'https://api-igreja-v2.herokuapp.com/'
