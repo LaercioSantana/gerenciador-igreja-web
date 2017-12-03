@@ -166,13 +166,13 @@ export default{
 
           this.$http.post(URL_API+"usuarios", payload ).then(response => {
 
-          // get body data
-          this.someData = response.body;
-          console.log(response);
+            // get body data
+            this.someData = response.body;
+            console.log(response);
 
-        }, response => {
-          console.log(response.body);
-        });
+          }, response => {
+            console.log(response.body);
+          });
         }
       }
   }

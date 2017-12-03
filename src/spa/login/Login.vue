@@ -59,7 +59,25 @@
     },
     methods: {
       login() {
+        this.$cookie.set('gerenciador_igreja_token', "be474af4-c398-4184-9559-0c65ce68db65dcafc348-0b92-4c3f-993c-bab98075a63b", 1);
         this.$router.push({ path: '/main' })
+
+        var payload = {
+          senha: this.password,
+          email: this.user
+        }
+
+        this.$http.post(URL_API+"usuarios/token", payload ).then(response => {
+
+          // get body data
+          //this.someData = response.body;
+          console.log(response);
+          this.$cookie.set('gerenciador_igreja_token', response.body.token, 1);
+          this.$router.push({ path: '/main' })
+
+        }, response => {
+          console.log(response.body);
+        });
       },
       signup() {
         this.$router.push({ path: '/signup' })

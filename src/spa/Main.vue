@@ -62,8 +62,10 @@
 
 <script type="text/javascript">
   import NewsPanel from '../shared-components/NewsPanel'
+  import RequireSession from './RequireSession'
 
   export default {
+    mixins: [RequireSession],
     data() {
       return {
 

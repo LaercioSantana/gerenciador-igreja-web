@@ -7,6 +7,7 @@ import { Validator } from 'vee-validate'
 import { sync } from 'vuex-router-sync'
 import VuejsCalendar from 'vuejs-calendar'
 import Vuelidate from 'vuelidate'
+import VueCookie from 'vue-cookie'
 
 // Importação de código de configuração/criação criados.
 import plugins from './config/plugins'
@@ -21,6 +22,7 @@ directives(Vue)
 theme(Vue)
 validations(Validator)
 Vue.use(Vuelidate)
+Vue.use(VueCookie);
 
 const store = new Vuex.Store(vuexStore)
 const router = configRouter(VueRouter)
