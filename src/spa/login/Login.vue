@@ -11,7 +11,7 @@
             v-validate
             data-vv-name="email"
             data-vv-rules="required|email"></md-input>
-          <span class="md-error"></span>
+          <span class="md-error">Formato de email inválido.</span>
         </md-input-container>
 
         <md-input-container>
@@ -19,6 +19,7 @@
           <md-input type="password"
             v-model="password"></md-input>
         </md-input-container>
+        <span class="md-error" v-if="userNotFound">Email ou senha errados.</span>
 
       </md-card-content>
 
@@ -42,7 +43,8 @@
     data() {
       return {
         user: '',
-        password: ''
+        password: '',
+        userNotFound: false,
       }
     },
     components: {
@@ -59,9 +61,6 @@
     },
     methods: {
       login() {
-        this.$cookie.set('gerenciador_igreja_token', "be474af4-c398-4184-9559-0c65ce68db65dcafc348-0b92-4c3f-993c-bab98075a63b", 1);
-        this.$router.push({ path: '/main' })
-
         var payload = {
           senha: this.password,
           email: this.user
@@ -71,12 +70,12 @@
 
           // get body data
           //this.someData = response.body;
-          console.log(response);
           this.$cookie.set('gerenciador_igreja_token', response.body.token, 1);
           this.$router.push({ path: '/main' })
 
         }, response => {
           console.log(response.body);
+          this.userNotFound = true
         });
       },
       signup() {
@@ -105,5 +104,8 @@
     img {
       max-width: 200px;
     }
+  }
+  .md-error {
+    color: red;
   }
 </style>

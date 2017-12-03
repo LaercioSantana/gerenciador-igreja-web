@@ -4,6 +4,7 @@ import Signup from '../spa/Signup'
 import NotFound from '../spa/NotFound'
 import Main from '../spa/Main'
 import Calendar from '../spa/Calendar'
+import AddEvent from '../spa/AddEvent'
 /* eslint-disable import/prefer-default-export */
 export const routes = [
   {
@@ -27,6 +28,10 @@ export const routes = [
         {
           path: 'calendar',
           component: Calendar
+        },
+        {
+          path: 'add-event',
+          component: AddEvent
         }
       ]
   },

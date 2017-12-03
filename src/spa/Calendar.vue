@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <full-calendar :events="fcEvents" locale="pt"></full-calendar>
+    <full-calendar :events="fcEvents" locale="pt" :config="config"></full-calendar>
   </div>
 </template>
 
@@ -41,12 +41,18 @@
 
   console.log(demoEvents);
 
+  demoEvents = []
+
 
   export default {
     name: 'Calendar',
     data: function(){
       return {
-        fcEvents: demoEvents
+        fcEvents: demoEvents,
+        config: {
+          selectable: true,
+          editable: true
+        }
       }
     },
     components: {

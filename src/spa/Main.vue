@@ -6,6 +6,10 @@
       </md-button>
 
       <h2 class="md-title">Gerenciador de Igreja</h2>
+
+      <md-button class="md-icon-button" @click="exit">
+        <md-icon>clear</md-icon>
+      </md-button>
     </md-toolbar>
 
     <md-layout md-gutter class="container" :style="{ height: viewHeight + 'px' }">
@@ -20,7 +24,7 @@
           </md-card-content>
 
           <md-card-actions>
-            <md-button>Adicionar Evento</md-button>
+            <md-button @click.native="addEvent()" :class="addEventButtonClass()">Adicionar Evento</md-button>
           </md-card-actions>
         </md-card>
       </md-layout>
@@ -67,9 +71,7 @@
   export default {
     mixins: [RequireSession],
     data() {
-      return {
-
-      }
+      return {}
     },
     components: {
       NewsPanel
@@ -92,11 +94,20 @@
       closeLeftSidenav() {
         this.$refs.leftSidenav.close();
       },
+      addEvent() {
+        this.$router.push({ path: '/main/add-event' })
+      },
       open(ref) {
         console.log('Opened: ' + ref);
       },
       close(ref) {
         console.log('Closed: ' + ref);
+      },
+      addEventButtonClass(){
+        console.log(this.$router);
+      },
+      exit(){
+        this.clearSession();
       }
     }
   }
@@ -146,5 +157,15 @@
     -webkit-border-radius: 2px;
     border-radius: 2px;
     background: rgba(0, 0, 0, 0.33);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .md-toolbar {
+    .md-title {
+      flex: 1 0 auto;
+    }
   }
 </style>

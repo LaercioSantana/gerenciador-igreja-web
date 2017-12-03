@@ -1,6 +1,7 @@
 <template>
   <div class="signup">
     <form novalidate class="md-layout-row md-gutter" @submit.prevent="validateUser">
+      <md-progress v-if="sending" md-indeterminate></md-progress>
       <md-card class="md-flex-50 md-flex-small-100">
         <md-card-header>
         </md-card-header>
@@ -54,6 +55,7 @@
             <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
             <span class="md-error" v-if="!$v.form.email.required">O email é requerido</span>
             <span class="md-error" v-else-if="!$v.form.email.email">Email inválido</span>
+            <span class="md-error" v-if="userConflict">Usuário já cadastrado</span>
           </md-input-container>
 
           <md-input-container :class="getValidationClass('password')">
@@ -71,8 +73,6 @@
           <md-button type="submit" class="md-primary" :disabled="sending">Criar conta</md-button>
         </md-card-actions>
       </md-card>
-
-      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
     </form>
   </div>
 </template>
@@ -114,7 +114,7 @@ export default{
         email: null,
         senha: null
       },
-      userSaved: false,
+      userConflict: false,
       sending: false,
       lastUser: null
     };
@@ -150,9 +150,13 @@ export default{
     getValidationClass (fieldName) {
       const field = this.$v.form[fieldName]
 
+      if(fieldName == 'email'){
+        var force = this.userConflict
+      }
+
       if (field) {
         return {
-          'md-input-invalid': field.$invalid && field.$dirty
+          'md-input-invalid': force || (field.$invalid && field.$dirty)
         }
       }
     },
@@ -160,18 +164,22 @@ export default{
         this.$v.$touch()
         if (!this.$v.$invalid) {
           var payload = {
-            senha: this.password,
-            email: this.email
-          }
+            senha: this.form.password,
+            email: this.form.email
+          };
+          this.sending = true
 
           this.$http.post(URL_API+"usuarios", payload ).then(response => {
 
-            // get body data
-            this.someData = response.body;
-            console.log(response);
+            this.$cookie.set('gerenciador_igreja_token', response.body.token, 1)
+            this.sending = false
+            this.$router.push({ path: '/main' })
 
           }, response => {
+            this.sending = false
             console.log(response.body);
+            console.log(this.userConflict);
+            this.userConflict = true
           });
         }
       }

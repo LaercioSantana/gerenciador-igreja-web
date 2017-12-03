@@ -7,6 +7,12 @@ var RequireSession = {
       this.$router.push({ path: '/login' })
     }
   },
+  methods: {
+    clearSession() {
+      this.$cookie.delete('gerenciador_igreja_token')
+      this.$router.push({ path: '/login' })
+    }
+  }
 }
 
 export default RequireSession
