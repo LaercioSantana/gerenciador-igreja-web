@@ -164,9 +164,13 @@
   }
 </script>
 
-<style>
+<style lang="scss">
 .calendar{
   height: 100%;
   min-height: 300px;
+
+  .fc-title {
+    color: white;
+  }
 }
 </style>
