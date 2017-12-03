@@ -128,6 +128,9 @@
         height: 100%;
         overflow: hidden;
       }
+      .md-card-content{
+        height: 100%;
+      }
     }
     .news-container{
       flex: 1 0 300px;

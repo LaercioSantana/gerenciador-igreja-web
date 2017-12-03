@@ -43,7 +43,6 @@ export const routes = [
 
 export const VueRouterObject = {
   routes,
-  mode: 'history',
   saveScrollPosition: true
 }
 

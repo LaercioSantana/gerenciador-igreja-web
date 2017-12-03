@@ -107,6 +107,7 @@
                  center: 'title',
                  right: 'month,agendaWeek,agendaDay,listWeek'
                },
+               height: 'parent',
                defaultDate: moment().format('YYYY-MM-DD'),
                navLinks: true, // can click day/week names to navigate views
                editable: true,
@@ -127,4 +128,8 @@
 </script>
 
 <style>
+.calendar{
+  height: 100%;
+  min-height: 300px;
+}
 </style>
