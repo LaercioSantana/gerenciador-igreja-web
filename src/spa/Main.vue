@@ -16,7 +16,7 @@
       <md-layout class="main-container">
         <md-card>
           <md-card-header>
-            <div class="md-title">Calendário de eventos</div>
+            <md-button @click.native="calendar" v-if="isAddEvent()"><md-icon>arrow_back</md-icon></md-button> <div class="md-title" v-else>Calendário de eventos</div>
           </md-card-header>
 
           <md-card-content>
@@ -24,7 +24,7 @@
           </md-card-content>
 
           <md-card-actions>
-            <md-button @click.native="addEvent()" :class="addEventButtonClass()">Adicionar Evento</md-button>
+            <md-button @click.native="addEvent()" >Adicionar Evento</md-button>
           </md-card-actions>
         </md-card>
       </md-layout>
@@ -79,9 +79,12 @@
     computed: {
       viewHeight: function(){
         return window.innerHeight - 100;
-      }
+      },
     },
     methods: {
+      isAddEvent() {
+        return this.$router.currentRoute.fullPath.indexOf('add-event') > -1
+      },
       toggleLeftSidenav() {
         this.$refs.leftSidenav.toggle();
       },
@@ -96,6 +99,9 @@
       },
       addEvent() {
         this.$router.push({ path: '/main/add-event' })
+      },
+      calendar() {
+        this.$router.push({ path: '/main/calendar' })
       },
       open(ref) {
         console.log('Opened: ' + ref);
