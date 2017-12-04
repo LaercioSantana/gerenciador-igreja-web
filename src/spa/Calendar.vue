@@ -118,26 +118,32 @@
             id_evento: this.evt.id_evento
         }
         console.log(payload);
+        console.log(this.present);
+        setTimeout(function(){
+          if(this.present)
+            this.$http.post(window.URL_API+"eventos/marcar_presenca", payload ).then(response => {
+              // get body data
+              this.loading = false
+              console.log(this.evt.presents, this.token);
+              this.evt.presents.push(this.token)
+              console.log(this.evt.presents);
+            }, response => {
+              this.loading = false
+              console.log(response.body);
+            });
+          else
+            this.$http.post(window.URL_API+"eventos/cancelar_presenca", payload ).then(response => {
+              // get body data
+              this.loading = false
 
-        if(this.present)
-          this.$http.post(window.URL_API+"eventos/marcar_presenca", payload ).then(response => {
-            // get body data
-            this.loading = false
-            this.evt.presents.push(this.token)
-          }, response => {
-            this.loading = false
-            console.log(response.body);
-          });
-        else
-          this.$http.post(window.URL_API+"eventos/cancelar_presenca", payload ).then(response => {
-            // get body data
-            this.loading = false
-
-            this.evt.presents.splice(this.evt.presents.indexOf(this.token), 1)
-          }, response => {
-            this.loading = false
-            console.log(response.body);
-          });
+              console.log(this.evt.presents, this.token);
+              this.evt.presents.splice(this.evt.presents.indexOf(this.token), 1)
+              console.log(this.evt.presents);
+            }, response => {
+              this.loading = false
+              console.log(response.body);
+            });
+        }.bind(this), 500)
 
       },
       loadEvents() {
@@ -189,7 +195,7 @@
                  event.startTime = moment(event.dateStart, "YYYY-MM-DD HH:mm:ss").calendar()
                  event.endTime = moment(event.dateEnd, "YYYY-MM-DD HH:mm:ss").calendar()
                  self.present = event.presents.indexOf(self.token) > -1
-                 console.log(event);
+                 console.log(event, self.present);
                  self.openDialog('dialog')
                }
              });
