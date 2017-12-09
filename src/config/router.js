@@ -17,8 +17,9 @@ export const routes = [
     component: Login
   },
   {
-    path: '/signup',
-    component: Signup
+    path: '/signup/:admin',
+    component: Signup,
+    props: true
   },
   {
     path: '/main',

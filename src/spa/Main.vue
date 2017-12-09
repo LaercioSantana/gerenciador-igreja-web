@@ -24,14 +24,14 @@
           </md-card-content>
 
           <md-card-actions>
-            <md-button @click.native="addEvent()" >Adicionar Evento</md-button>
+            <md-button @click.native="addEvent()" v-if="!isAddEvent() && isAdmin" >Adicionar Evento</md-button>
           </md-card-actions>
         </md-card>
       </md-layout>
       <md-layout class="news-container">
         <md-card>
           <md-card-header>
-            <md-button @click.native="news" v-if="addNewsView"><md-icon>arrow_back</md-icon></md-button>
+            <md-button @click.native="news" v-if="addNewsView && isAdmin"><md-icon>arrow_back</md-icon></md-button>
             <div  v-if="!addNewsView" class="md-title">Notícias</div>
           </md-card-header>
 
@@ -40,7 +40,7 @@
           </md-card-content>
 
           <md-card-actions>
-            <md-button v-if="!addNewsView" @click.native="addNews()" >Adicionar Notícia</md-button>
+            <md-button v-if="!addNewsView && isAdmin" @click.native="addNews()" >Adicionar Notícia</md-button>
           </md-card-actions>
         </md-card>
       </md-layout>
@@ -52,16 +52,16 @@
         <md-list-item>
             <router-link to="/main/calendar" @click.native="closeLeftSidenav()">Home</router-link>
         </md-list-item>
-        <md-list-item>
+        <md-list-item v-if="isAdmin">
             <router-link to="/main/calendar" @click.native="closeLeftSidenav()">Financeiro</router-link>
         </md-list-item>
-        <md-list-item>
+        <md-list-item v-if="isAdmin">
             <router-link to="/main/calendar" @click.native="closeLeftSidenav()">Informação Membros</router-link>
         </md-list-item>
         <md-list-item>
             <router-link to="/main/calendar" @click.native="closeLeftSidenav()">Informações Cadastrais</router-link>
         </md-list-item>
-        <md-list-item>
+        <md-list-item v-if="isAdmin">
             <router-link to="/main/calendar" @click.native="closeLeftSidenav()">Notícias</router-link>
         </md-list-item>
       </md-list>

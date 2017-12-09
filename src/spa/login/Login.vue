@@ -71,6 +71,7 @@
           // get body data
           //this.someData = response.body;
           this.$cookie.set('gerenciador_igreja_token', response.body.token, 1);
+          this.$cookie.set('gerenciador_igreja_admin', response.body.admin, 1);
           this.$router.push({ path: '/main' })
 
         }, response => {
@@ -79,7 +80,7 @@
         });
       },
       signup() {
-        this.$router.push({ path: '/signup' })
+        this.$router.push({ path: '/signup/false' })
       }
     }
   }

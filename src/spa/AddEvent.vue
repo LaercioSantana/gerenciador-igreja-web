@@ -89,11 +89,14 @@ import myDatepicker from 'vue-datepicker'
 import moment from 'moment';
 window.moment = moment
 
+import RequireSession from './RequireSession'
+
 export default{
   name: 'AddEvent',
   components: {
     'date-picker': myDatepicker
   },
+  mixins: [RequireSession],
   data: function(){
     return {
       form: {
@@ -210,6 +213,9 @@ export default{
         return false
       return this.form.dateStart.time > this.form.dateEnd.time
     }
+  },
+  created(){
+    this.needAdmin()
   },
   watch: {
     'form.dateStart.time': function(){

@@ -4,6 +4,8 @@
       <md-progress v-if="sending" md-indeterminate></md-progress>
       <md-card class="md-flex-50 md-flex-small-100">
         <md-card-header>
+          <div class="md-title" v-if="isAdmin()">Dados do Administrador</div>
+          <div class="md-title" v-else>Dados do Usuário</div>
         </md-card-header>
 
         <md-card-content>
@@ -104,6 +106,11 @@ import {
 
 export default{
   name: 'Signup',
+  props: {
+    admin: {
+      default: false,
+    }
+  },
   data: function(){
     return {
       form: {
@@ -118,6 +125,9 @@ export default{
       sending: false,
       lastUser: null
     };
+  },
+  created(){
+    console.log("isAdmin", this.admin);
   },
   validations: {
     form: {
@@ -147,6 +157,9 @@ export default{
     }
   },
   methods: {
+    isAdmin(){
+      return this.admin == "true"
+    },
     getValidationClass (fieldName) {
       const field = this.$v.form[fieldName]
 
@@ -165,13 +178,15 @@ export default{
         if (!this.$v.$invalid) {
           var payload = {
             senha: this.form.password,
-            email: this.form.email
+            email: this.form.email,
+            admin: this.isAdmin()
           };
           this.sending = true
 
           this.$http.post(URL_API+"usuarios", payload ).then(response => {
 
             this.$cookie.set('gerenciador_igreja_token', response.body.token, 1)
+            this.$cookie.set('gerenciador_igreja_admin', payload.admin, 1)
             this.sending = false
             this.$router.push({ path: '/main' })
 
