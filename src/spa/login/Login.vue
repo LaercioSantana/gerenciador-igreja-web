@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="Login__Wrapper">
+    <img class="logo" src="/static/eitaJesus.png" />
     <md-card class="Login__CardWrappper">
 
       <md-card-content>
@@ -91,10 +92,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 
   .Login__CardWrappper {
-    margin-top: 20vh;
     min-width: 400px;
     width: 22%;
   }
@@ -108,5 +109,10 @@
   }
   .md-error {
     color: red;
+  }
+
+  .logo {
+    margin: 0 auto;
+    margin-top: 12vh;
   }
 </style>

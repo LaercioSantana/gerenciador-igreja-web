@@ -29,4 +29,7 @@
     transform: translateX(10px);
     opacity: 0;
   }
+  body {
+    overflow: hidden;
+  }
 </style>

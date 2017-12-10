@@ -47,6 +47,12 @@
     </md-layout>
 
     <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
+      <md-toolbar class="md-large md-transparent">
+        <div class="md-toolbar-container">
+          <img class="logo" src="/static/eitaJesus.png" />
+        </div>
+
+      </md-toolbar>
 
       <md-list>
         <md-list-item>
@@ -191,5 +197,15 @@
     .md-title {
       flex: 1 0 auto;
     }
+  }
+
+  .logo {
+    height: 150%;
+    margin: auto;
+    margin-top: 1em;
+  }
+
+  .md-toolbar .md-large {
+    border-bottom: 2px solid #ccc;
   }
 </style>
