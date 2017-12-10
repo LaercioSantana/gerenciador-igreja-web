@@ -48,7 +48,7 @@
          <span class="md-error" v-if="!$v.form.responsible.required">O criador é requerido</span>
        </md-input-container>
 
-       <md-button @click.native="addEvent()">Adicionar Notícia</md-button>
+       <md-button class="add-news" @click.native="addEvent()">Adicionar Notícia</md-button>
      </div>
 
      <md-dialog md-open-from="#full-calendar" md-close-to="#full-calendar" ref="dialog">
@@ -57,10 +57,10 @@
        <md-dialog-content>
            <span class="md-body-1">{{newsSelected.content}}</span>
          </br></br>
-         <div class="md-body-1">data: {{formateDate(newsSelected.date)}}</div>
-           <div class="md-body-1">Tipo: {{newsSelected.type}}</div>
-           <div class="md-body-1">Criador: {{newsSelected.responsible}}</div>
-           <div class="md-body-1">Congregação: {{newsSelected.congregation}}</div>
+           <div class="md-body-1"><b>Data:</b> {{formateDate(newsSelected.date)}}</div>
+           <div class="md-body-1"><b>Tipo:</b> {{newsSelected.type}}</div>
+           <div class="md-body-1"><b>Criador:</b> {{newsSelected.responsible}}</div>
+           <div class="md-body-1"><b>Congregação:</b> {{newsSelected.congregation}}</div>
        </md-dialog-content>
 
        <md-dialog-actions>
@@ -76,6 +76,10 @@
 
    .news {
      margin: 10px 0;
+   }
+
+   .add-news {
+     float: right;
    }
  }
  </style>

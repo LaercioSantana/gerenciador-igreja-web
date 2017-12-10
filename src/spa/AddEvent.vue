@@ -59,7 +59,7 @@
         <span class="md-error" v-if="!$v.form.responsible.required">O responsável é requerido</span>
       </md-input-container>
 
-      <md-button @click.native="addEvent()">Adicionar Evento</md-button>
+      <md-button class="add-event" @click.native="addEvent()">Adicionar Evento</md-button>
     </form>
   </div>
 </template>
@@ -72,6 +72,10 @@
 
   .md-error {
     color: red;
+  }
+
+  .add-event {
+    float: right;
   }
 }
 </style>

@@ -205,7 +205,7 @@
     margin-top: 1em;
   }
 
-  .md-toolbar .md-large {
+  .md-toolbar.md-large {
     border-bottom: 2px solid #ccc;
   }
 </style>

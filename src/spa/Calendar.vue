@@ -9,13 +9,13 @@
       <md-dialog-content>
           <span class="md-body-1">{{evt.content}}</span>
         </br></br>
-          <div class="md-body-1">Tipo: {{evt.type}}</div>
-          <div class="md-body-1">Inicia: {{evt.startTime}}</div>
-          <div class="md-body-1">Termina: {{evt.endTime}}</div>
-          <div class="md-body-1">Responsável: {{evt.reponsible}}</div>
-          <div class="md-body-1">Congregação: {{evt.congregation}}</div>
-          <div class="md-body-1">Endereço: {{evt.address}}</div>
-          <div class="md-body-1">Quantidade de participantes: {{presents}}</div>
+          <div class="md-body-1"><b>Tipo:</b> {{evt.type}}</div>
+          <div class="md-body-1"><b>Inicia:</b> {{evt.startTime}}</div>
+          <div class="md-body-1"><b>Termina:</b> {{evt.endTime}}</div>
+          <div class="md-body-1"><b>Responsável:</b> {{evt.reponsible}}</div>
+          <div class="md-body-1"><b>Congregação:</b> {{evt.congregation}}</div>
+          <div class="md-body-1"><b>Endereço:</b> {{evt.address}}</div>
+          <div class="md-body-1"><b>Quantidade de participantes:</b> {{presents}}</div>
 
           <md-switch v-model="present" @click.native="!loading && sendPresent()" id="present" name="present" :disabled="loading">Estarei presente</md-switch>
       </md-dialog-content>
