@@ -208,6 +208,7 @@
      },
      addEvent() {
        this.$v.$touch()
+       console.log(this.$v);
        if (!this.$v.$invalid) {
          this.loading = true
          var payload = {
@@ -235,11 +236,22 @@
            this.loading = false
            this.$emit("news-added")
 
+           this.clearForm()
+
          }, response => {
            this.loading = false
            console.log(response.body);
          });
        }
+     },
+     clearForm(){
+       this.form.title = null
+       this.form.type = null
+       this.form.date = null
+       this.form.responsible = null
+       this.form.content = null
+       this.form.congregation = null
+       this.$v.$reset()
      },
      loadNews(){
        console.log(window);
